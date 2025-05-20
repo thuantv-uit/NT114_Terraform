@@ -80,7 +80,7 @@ resource "aws_route_table_association" "private" {
 resource "aws_security_group" "default" {
   vpc_id      = aws_vpc.main.id
   name        = "default-sg"
-  description = "Security Group mặc định cho VPC"
+  description = "Nhom bao mat mac dinh cho VPC"
   tags = {
     Name = "default-sg"
   }
