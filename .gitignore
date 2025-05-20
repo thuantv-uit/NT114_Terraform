@@ -1,0 +1,8 @@
+# Bỏ qua file khóa riêng
+nt548-key.pem
+
+# Bỏ qua Terraform state và cache
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
