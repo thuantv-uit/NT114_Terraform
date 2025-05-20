@@ -1,6 +1,6 @@
 resource "aws_security_group" "public_ec2" {
   vpc_id      = var.vpc_id
-  name        = "public-ec2-sg"
+  name        = "thuantv-production-ec2"
   description = "Security Group cho Public EC2 instance"
 
   ingress {
@@ -18,13 +18,13 @@ resource "aws_security_group" "public_ec2" {
   }
 
   tags = {
-    Name = "public-ec2-sg"
+    Name = "thuantv-production-ec2"
   }
 }
 
 resource "aws_security_group" "private_ec2" {
   vpc_id      = var.vpc_id
-  name        = "private-ec2-sg"
+  name        = "thuantv-develops-ec2"
   description = "Security Group cho Private EC2 instance"
 
   ingress {
@@ -42,6 +42,6 @@ resource "aws_security_group" "private_ec2" {
   }
 
   tags = {
-    Name = "private-ec2-sg"
+    Name = "thuantv-develops-ec2"
   }
 }

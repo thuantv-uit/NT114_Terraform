@@ -5,14 +5,14 @@ resource "tls_private_key" "nt548_key" {
 }
 
 resource "aws_key_pair" "nt548_key" {
-  key_name   = "nt548-key"
+  key_name   = "thuantv"
   public_key = tls_private_key.nt548_key.public_key_openssh
 }
 
 # Lưu khóa riêng vào file .pem
 resource "local_file" "nt548_key_pem" {
   content         = tls_private_key.nt548_key.private_key_pem
-  filename        = "./nt548-key.pem"
+  filename        = "./thuantv.pem"
   file_permission = "0400"
 }
 
@@ -38,4 +38,10 @@ module "ec2" {
   private_sg_id     = module.security_groups.private_sg_id
   ami_id            = var.ami_id
   key_name          = aws_key_pair.nt548_key.key_name
+}
+
+module "s3_state" {
+  source              = "./modules/s3_state"
+  state_bucket_name   = var.state_bucket_name
+  dynamodb_table_name = var.dynamodb_table_name
 }
