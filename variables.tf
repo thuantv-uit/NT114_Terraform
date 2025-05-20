@@ -33,3 +33,15 @@ variable "ami_id" {
   type        = string
   default     = "ami-0e8a34246278c21e4"
 }
+
+variable "state_bucket_name" {
+  description = "Tên của S3 bucket để lưu trữ Terraform state"
+  type        = string
+  default     = "my-terraform-state-bucket-123"
+}
+
+variable "dynamodb_table_name" {
+  description = "Tên của bảng DynamoDB để khóa trạng thái"
+  type        = string
+  default     = "terraform-locks"
+}

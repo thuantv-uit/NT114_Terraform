@@ -1,5 +1,5 @@
 # Bỏ qua file khóa riêng
-nt548-key.pem
+thuantv.pem
 
 # Bỏ qua Terraform state và cache
 *.tfstate

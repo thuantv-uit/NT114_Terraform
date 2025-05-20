@@ -3,7 +3,7 @@ resource "aws_vpc" "main" {
   enable_dns_support   = true
   enable_dns_hostnames = true
   tags = {
-    Name = "nt548-vpc"
+    Name = "thuantv-vpc"
   }
 }
 
@@ -13,7 +13,7 @@ resource "aws_subnet" "public" {
   availability_zone       = "${var.region}a"
   map_public_ip_on_launch = true
   tags = {
-    Name = "public-subnet"
+    Name = "thuantv-public-subnet"
   }
 }
 
@@ -22,14 +22,14 @@ resource "aws_subnet" "private" {
   cidr_block        = var.private_subnet_cidr
   availability_zone = "${var.region}a"
   tags = {
-    Name = "private-subnet"
+    Name = "thuantv-private-subnet"
   }
 }
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "nt548-igw"
+    Name = "thuantv-igw"
   }
 }
 
@@ -41,7 +41,7 @@ resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.nat_eip.id
   subnet_id     = aws_subnet.public.id
   tags = {
-    Name = "nt548-nat"
+    Name = "thuantv-nat"
   }
 }
 
@@ -52,7 +52,7 @@ resource "aws_route_table" "public" {
     gateway_id = aws_internet_gateway.igw.id
   }
   tags = {
-    Name = "public-route-table"
+    Name = "thuantv-public-route-table"
   }
 }
 
@@ -68,7 +68,7 @@ resource "aws_route_table" "private" {
     nat_gateway_id = aws_nat_gateway.nat.id
   }
   tags = {
-    Name = "private-route-table"
+    Name = "thuantv-private-route-table"
   }
 }
 
@@ -82,6 +82,6 @@ resource "aws_security_group" "default" {
   name        = "default-sg"
   description = "Nhom bao mat mac dinh cho VPC"
   tags = {
-    Name = "default-sg"
+    Name = "thuantv-default-sg"
   }
 }
