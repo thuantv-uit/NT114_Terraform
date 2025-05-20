@@ -19,17 +19,17 @@ Kho lưu trữ này chứa mã Terraform để triển khai hạ tầng AWS bao 
 5. File nt548-key.pem sẽ được tạo trong thư mục dự án.
 
 ## Kiểm tra
-### SSH vào Public EC2:
+1. SSH vào Public EC2:
     ```bash
     ssh -i nt548-key.pem ec2-user@<public-ec2-ip>
     ```
-### SSH từ Public EC2 vào Private EC2:
+2. SSH từ Public EC2 vào Private EC2:
     ```bash
     scp -i nt548-key.pem nt548-key.pem ec2-user@<public-ec2-ip>:~/.ssh/
     ssh -i ~/.ssh/nt548-key.pem ec2-user@<private-ec2-ip>
     ```
 ## Dọn dẹp
-### Để tránh chi phí, xóa tài nguyên sau khi hoàn thành:
+1. Để tránh chi phí, xóa tài nguyên sau khi hoàn thành:
     ```bash
     terraform destroy
     rm nt548-key.pem
