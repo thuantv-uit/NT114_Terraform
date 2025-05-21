@@ -7,19 +7,19 @@ variable "region" {
 variable "vpc_cidr" {
   description = "Khối CIDR cho VPC"
   type        = string
-  default     = "10.0.0.0/16"
+  default     = "20.0.0.0/16"
 }
 
 variable "public_subnet_cidr" {
   description = "Khối CIDR cho Public Subnet"
   type        = string
-  default     = "10.0.1.0/24"
+  default     = "20.0.1.0/24"
 }
 
 variable "private_subnet_cidr" {
   description = "Khối CIDR cho Private Subnet"
   type        = string
-  default     = "10.0.2.0/24"
+  default     = "20.0.2.0/24"
 }
 
 variable "allowed_ssh_ip" {
@@ -31,7 +31,7 @@ variable "allowed_ssh_ip" {
 variable "ami_id" {
   description = "ID của AMI cho EC2 instances"
   type        = string
-  default     = "ami-0e8a34246278c21e4"
+  default     = "ami-0f9de6e2d2f067fca"
 }
 
 variable "state_bucket_name" {
