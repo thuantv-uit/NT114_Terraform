@@ -9,7 +9,7 @@ resource "aws_iam_user" "my_user" {
   path = "/"
 
   tags = {
-    Name = "MyIAMUser"
+    Name = "thuan_iam"
   }
 }
 

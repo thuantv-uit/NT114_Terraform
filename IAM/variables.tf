@@ -7,5 +7,5 @@ variable "region" {
 variable "user_name" {
   description = "Tên của IAM user"
   type        = string
-  default     = "hello-iam-user"
+  default     = "thuan_iam"
 }
