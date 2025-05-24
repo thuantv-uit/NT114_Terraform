@@ -94,11 +94,6 @@ jobs:
         run: |
           git checkout -b terraform-plan-output || git checkout terraform-plan-output
 
-      # Di chuyển tệp terraform-plan-output.txt vào nhánh
-      - name: Copy Terraform Plan output
-        run: |
-          mv terraform-plan-output.txt .
-
       - name: Commit and push to terraform-plan-output branch
         run: |
           git add terraform-plan-output.txt
