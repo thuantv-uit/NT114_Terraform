@@ -11,7 +11,7 @@ on:
 
 # Quyền cần thiết cho workflow
 permissions:
-  contents: read
+  contents: write  # Cần quyền write để tạo nhánh và push nội dung
   pull-requests: write  # Để thêm bình luận trên pull request
 
 jobs:
@@ -19,7 +19,6 @@ jobs:
     name: Terraform Validation and Plan
     runs-on: ubuntu-latest
 
-    # Định nghĩa các bước trong job
     steps:
       # Kiểm tra mã nguồn từ kho lưu trữ
       - name: Checkout repository
@@ -29,7 +28,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.5.7  # Chỉ định phiên bản Terraform phù hợp
+          terraform_version: 1.5.7
 
       # Khởi tạo Terraform
       - name: Terraform Init
@@ -41,7 +40,7 @@ jobs:
       # Kiểm tra định dạng mã
       - name: Terraform Format
         run: terraform fmt -check -recursive
-        continue-on-error: false  # Thất bại nếu định dạng không đúng
+        continue-on-error: false
 
       # Xác thực mã Terraform
       - name: Terraform Validate
@@ -50,7 +49,7 @@ jobs:
       # Tạo kế hoạch Terraform
       - name: Terraform Plan
         id: plan
-        run: terraform plan -out=tfplan -input=false
+        run: terraform plan -out=tfplan -input=false > terraform-plan-output.txt
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -68,3 +67,41 @@ jobs:
               repo: context.repo.repo,
               body: `### Terraform Plan Output\n\`\`\`\n${output}\n\`\`\``
             });
+
+  # Job mới để lưu kết quả Terraform Plan vào nhánh riêng
+  save-plan-output:
+    name: Save Terraform Plan Output
+    runs-on: ubuntu-latest
+    needs: terraform  # Chạy sau khi job terraform hoàn thành
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'  # Chỉ chạy khi push vào main
+    steps:
+      # Checkout mã nguồn
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      # Thiết lập Git
+      - name: Setup Git
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+
+      # Tạo hoặc checkout nhánh terraform-plan-output
+      - name: Create or checkout terraform-plan-output branch
+        run: |
+          git checkout -b terraform-plan-output || git checkout terraform-plan-output
+
+      # Sao chép kết quả Terraform Plan từ job trước
+      - name: Copy Terraform Plan output
+        run: |
+          # Giả sử tệp terraform-plan-output.txt đã được tạo trong job terraform
+          # Nếu cần, bạn có thể lưu tệp này vào artifact và tải về ở đây
+          mv terraform-plan-output.txt .
+
+      # Commit và push kết quả vào nhánh terraform-plan-output
+      - name: Commit and push to terraform-plan-output branch
+        run: |
+          git add terraform-plan-output.txt
+          git commit -m "Update Terraform Plan output - $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push origin terraform-plan-output --force
