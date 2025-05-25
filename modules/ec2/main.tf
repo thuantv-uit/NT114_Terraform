@@ -8,13 +8,13 @@ resource "aws_instance" "public" {
   user_data = <<-EOF
               #!/bin/bash
               # Tạo thư mục thuatv trong /
-              mkdir -p /thuatv
+              mkdir -p /thuantv
 
               # Đăng nhập với quyền root
               sudo -i
 
               # Chuyển đến thư mục /thuatv
-              cd /thuatv
+              cd /thuantv
 
               # Cập nhật danh sách gói
               apt update
@@ -32,7 +32,7 @@ resource "aws_instance" "public" {
               docker pull thuan410/nt114-be-board:v2
               docker pull thuan410/nt114-be-column:v2
               docker pull thuan410/nt114-be-card:v2
-              docker pull thuan410/nt114-be-invitation:v2
+              docker pull thuan410/nt114-be-invitation:latest
 
               # Chạy Docker Run
               docker run -d --name frontend -p 3000:3000 thuan410/nt114-frontend:v2
@@ -40,8 +40,7 @@ resource "aws_instance" "public" {
               docker run -d --name be-board -p 3002:3002 thuan410/nt114-be-board:v2
               docker run -d --name be-column -p 3003:3003 thuan410/nt114-be-column:v2
               docker run -d --name be-card -p 3004:3004 thuan410/nt114-be-card:v2
-              docker run -d --name be-invitation -p 3005:3005 thuan410/nt114-be-invitation:v2
-
+              docker run -d --name be-invitation -p 3005:3005 thuan410/nt114-be-invitation:latest
               EOF
 
   tags = {
@@ -59,17 +58,17 @@ resource "aws_instance" "private" {
   user_data = <<-EOF
               #!/bin/bash
               # Tạo thư mục thuatv trong /
-              mkdir -p /thuatv
+              mkdir -p /thuantv
 
               # Đăng nhập với quyền root
               sudo -i
 
               # Chuyển đến thư mục /thuatv
-              cd /thuatv
+              cd /thuantv
 
               # Cập nhật danh sách gói
               apt update
-              
+
               # Cài đặt Docker
               apt install -y docker.io
 
@@ -83,7 +82,7 @@ resource "aws_instance" "private" {
               docker pull thuan410/nt114-be-board:v2
               docker pull thuan410/nt114-be-column:v2
               docker pull thuan410/nt114-be-card:v2
-              docker pull thuan410/nt114-be-invitation:v2
+              docker pull thuan410/nt114-be-invitation:latest
 
               # Chạy Docker Run
               docker run -d --name frontend -p 3000:3000 thuan410/nt114-frontend:v2
@@ -91,8 +90,7 @@ resource "aws_instance" "private" {
               docker run -d --name be-board -p 3002:3002 thuan410/nt114-be-board:v2
               docker run -d --name be-column -p 3003:3003 thuan410/nt114-be-column:v2
               docker run -d --name be-card -p 3004:3004 thuan410/nt114-be-card:v2
-              docker run -d --name be-invitation -p 3005:3005 thuan410/nt114-be-invitation:v2
-
+              docker run -d --name be-invitation -p 3005:3005 thuan410/nt114-be-invitation:latest
               EOF
 
   tags = {

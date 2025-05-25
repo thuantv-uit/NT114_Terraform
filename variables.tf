@@ -7,19 +7,19 @@ variable "region" {
 variable "vpc_cidr" {
   description = "Khối CIDR cho VPC"
   type        = string
-  default     = "20.0.0.0/16"
+  default     = "10.0.0.0/16"
 }
 
 variable "public_subnet_cidr" {
   description = "Khối CIDR cho Public Subnet"
   type        = string
-  default     = "20.0.1.0/24"
+  default     = "10.0.1.0/24"
 }
 
 variable "private_subnet_cidr" {
   description = "Khối CIDR cho Private Subnet"
   type        = string
-  default     = "20.0.2.0/24"
+  default     = "10.0.2.0/24"
 }
 
 variable "allowed_ssh_ip" {
