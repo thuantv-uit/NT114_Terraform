@@ -1,12 +1,12 @@
 #!/bin/bash
 # Tạo thư mục thuatv trong /
-mkdir -p /thuatv
+mkdir -p /thuantv
 
 # Đăng nhập với quyền root
 sudo -i
 
 # Chuyển đến thư mục /thuatv
-cd /thuatv
+cd /thuantv
 
 # Cập nhật danh sách gói
 apt update
