@@ -45,3 +45,9 @@ variable "dynamodb_table_name" {
   type        = string
   default     = "terraform-locks"
 }
+
+variable "instances_type" {
+  description = "Danh sách các instance EC2 cần tạo"
+  type        = string
+  default     = "t3.medium"
+}
