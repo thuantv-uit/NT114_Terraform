@@ -37,6 +37,7 @@ module "ec2" {
   public_sg_id      = module.security_groups.public_sg_id
   private_sg_id     = module.security_groups.private_sg_id
   ami_id            = var.ami_id
+  instances_type    = var.instances_type
   key_name          = aws_key_pair.nt548_key.key_name
 }
 

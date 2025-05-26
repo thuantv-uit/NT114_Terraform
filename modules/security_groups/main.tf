@@ -3,6 +3,7 @@ resource "aws_security_group" "public_ec2" {
   name        = "thuantv-production-ec2"
   description = "Security Group cho Public EC2 instance"
 
+  # SSH
   ingress {
     from_port   = 22
     to_port     = 22
@@ -10,6 +11,7 @@ resource "aws_security_group" "public_ec2" {
     cidr_blocks = [var.allowed_ssh_ip]
   }
 
+  # HTTP
   ingress {
     from_port   = 80
     to_port     = 80
@@ -17,11 +19,20 @@ resource "aws_security_group" "public_ec2" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  # HTTPs
   ingress {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # Frontend and Backend ports
+  ingress {
+    from_port   = 3000
+    to_port     = 3005
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] # Hoặc giới hạn IP của bạn
   }
 
   egress {

@@ -23,6 +23,11 @@ variable "ami_id" {
   type        = string
 }
 
+variable "instances_type" {
+  description = "Loại instance EC2"
+  type        = string
+}
+
 variable "key_name" {
   description = "Tên của cặp khóa SSH"
   type        = string

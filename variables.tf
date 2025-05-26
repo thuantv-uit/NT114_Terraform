@@ -7,19 +7,19 @@ variable "region" {
 variable "vpc_cidr" {
   description = "Khối CIDR cho VPC"
   type        = string
-  default     = "10.0.0.0/16"
+  default     = "50.0.0.0/16"
 }
 
 variable "public_subnet_cidr" {
   description = "Khối CIDR cho Public Subnet"
   type        = string
-  default     = "10.0.1.0/24"
+  default     = "50.0.1.0/24"
 }
 
 variable "private_subnet_cidr" {
   description = "Khối CIDR cho Private Subnet"
   type        = string
-  default     = "10.0.2.0/24"
+  default     = "50.0.2.0/24"
 }
 
 variable "allowed_ssh_ip" {
@@ -44,4 +44,10 @@ variable "dynamodb_table_name" {
   description = "Tên của bảng DynamoDB để khóa trạng thái"
   type        = string
   default     = "terraform-locks"
+}
+
+variable "instances_type" {
+  description = "Danh sách các instance EC2 cần tạo"
+  type        = string
+  default     = "t3.medium"
 }

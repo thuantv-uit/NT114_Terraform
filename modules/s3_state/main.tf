@@ -1,6 +1,7 @@
 # Tạo S3 bucket để lưu trữ Terraform state
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = var.state_bucket_name
+  bucket        = var.state_bucket_name
+  force_destroy = true # Cho phép xóa bucket ngay cả khi có các đối tượng bên trong
 
   tags = {
     Name        = "thuantv-TerraformStateBucket"
